@@ -13,6 +13,18 @@
         }
       ],
       "environment": [
+        {
+          "name": "VIRTUAL_HOST",
+          "value": "typebotbuilder.whiteblinkcmds.com"
+        },
+        {
+          "name": "VIRTUAL_PORT",
+          "value": "3000"
+        },
+        {
+          "name": "VIRTUAL_TLS_EMAIL",
+          "value": "citizensprojects@whiteblink.com"
+        }
       ]
     },
     {
@@ -27,7 +39,60 @@
         }
       ],
       "environment": [
+        {
+          "name": "VIRTUAL_HOST",
+          "value": "typebotviewer.whiteblinkcmds.com"
+        },
+        {
+          "name": "VIRTUAL_PORT",
+          "value": "3000"
+        },
+        {
+          "name": "VIRTUAL_TLS_EMAIL",
+          "value": "citizensprojects@whiteblink.com"
+        }
       ]
+    },
+    {
+      "name": "caddy-gen",
+      "image": "wemakeservices/caddy-gen:latest",
+      "essential": true,
+      "memory": 128,
+      "portMappings": [
+        {
+          "hostPort": 80,
+          "containerPort": 80
+        },
+        {
+          "hostPort": 443,
+          "containerPort": 443
+        }
+      ],
+      "mountPoints": [
+        {
+          "sourceVolume": "docker_sock",
+          "containerPath": "/tmp/docker.sock",
+          "readOnly": true
+        },
+        {
+          "sourceVolume": "caddy_certificates",
+          "containerPath": "/data/caddy"
+        }
+      ]
+    }
+  ],
+  "volumes": [
+    {
+      "name": "docker_sock",
+      "host": {
+        "sourcePath": "/var/run/docker.sock"
+      }
+    },
+    {
+      "name": "caddy_certificates",
+      "host": {
+        "sourcePath": "/var/app/current/.typebot/caddy-certificates"
+      }
     }
   ]
 }
