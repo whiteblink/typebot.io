@@ -1,0 +1,33 @@
+{
+  "AWSEBDockerrunVersion": 2,
+  "containerDefinitions": [
+    {
+      "name": "typebot-builder",
+      "image": "%REPOSITORY_URI_TYPEBOT_BUILDER%",
+      "essential": true,
+      "memory": 128,
+      "portMappings": [
+        {
+          "hostPort": 8080,
+          "containerPort": 3000
+        }
+      ],
+      "environment": [
+      ]
+    },
+    {
+      "name": "typebot-viewer",
+      "image": "%REPOSITORY_URI_TYPEBOT_VIEWER%",
+      "essential": true,
+      "memory": 128,
+      "portMappings": [
+        {
+          "hostPort": 8081,
+          "containerPort": 3000
+        }
+      ],
+      "environment": [
+      ]
+    }
+  ]
+}
